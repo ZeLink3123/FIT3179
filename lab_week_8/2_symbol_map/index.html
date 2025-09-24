@@ -8,17 +8,17 @@
   
   
   <!-- CSS file -->
-  <link rel="stylesheet" type="text/css" href="css/main.css" media="all">
+  <link rel="stylesheet" type="text/css" href="css/styles.css" media="all">
   
 </head>
 <body>
   
-<div id="melbourne-map"></div>
+<div id="symbol_map"></div>
 
 <script type="text/javascript">
 
-  var spec2 = "js/scatter_plot_interactive.vg.json";
-  vegaEmbed('#scatter_plot', spec2).then(function(result) {
+  var spec2 = "js/symbol_map.vg.json";
+  vegaEmbed('#symbol_map', spec2).then(function(result) {
     // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
   }).catch(console.error);
 </script>
