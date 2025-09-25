@@ -4,6 +4,10 @@ body {
     width: 100vw;
 }
 
+body h1 {
+    margin: 20px;
+}
+
 .container {
     margin: 20px;
 }

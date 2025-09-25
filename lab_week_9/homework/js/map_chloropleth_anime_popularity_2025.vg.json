@@ -187,8 +187,7 @@
         },
         "encoding": {
             "longitude": {"field": "longitude_offset"},
-            "latitude": {"field": "latitude_offset"},
-            "text": {"field": "note"}
+            "latitude": {"field": "latitude_offset"}
         }
       },
       {
