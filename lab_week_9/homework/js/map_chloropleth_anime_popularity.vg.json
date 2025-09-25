@@ -18,12 +18,12 @@
       {
         "transform": [
           {
-            "calculate": "'Data is not available in ' + datum.properties.NAME",
+            "calculate": "datum.properties.NAME + 'has search interest index of: 0'",
             "as": "note"
           }
         ],
         "mark": {"type": "geoshape", "fill": "lightgray", "stroke": "white"},
-        "encoding": {"tooltip": {"field": "note"}}
+        "encoding": {"tooltip": {"field": "note"}, "color": {"value": "lightgray"}}
       },
       {
         "name": "oceans",
