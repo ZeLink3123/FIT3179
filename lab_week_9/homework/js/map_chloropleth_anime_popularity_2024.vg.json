@@ -111,32 +111,85 @@
         }
       },
       {
+        "name": "japan_label_box",
+        "transform": [
+          {
+            "calculate": "datum.latitude + 1.7", 
+            "as": "latitude_offset"
+          },
+          {
+            "calculate": "datum.longitude + 0.9", 
+            "as": "longitude_offset"
+          }
+        ],
+        "data": {
+          "values": [
+            {"country": "Japan", "longitude": 170.2529, "latitude": 36.2048, "note": "Japan, the Home of Anime"}
+            ]
+        },
+      
+        "mark": {
+          "type": "rect",
+          "fill": "rgba(255, 255, 255, 0.7)",
+          "width": 110,
+          "height": 20
+        },
+        "encoding": {
+          "longitude": {"field": "longitude_offset"},
+          "latitude": {"field": "latitude_offset"}
+        }
+      },
+      {
         "name": "japan_label",
         "data": {
         "values": [
           {"country": "Japan", "longitude": 170.2529, "latitude": 36.2048, "note": "Japan, the Home of Anime"}
+          ]
+        },
+      
+        "mark": {
+          "type": "text",
+          "fontSize": 12,
+          "color": "black",
+          "fontWeight": "bold",
+          "dy": -5,
+          "dx": 25
+        },
+        "encoding": {
+          "longitude": {"field": "longitude"},
+          "latitude": {"field": "latitude"},
+          "text": {"field": "note"}
+        }
+      },
+      {
+        "name": "highest_search_per_capita_label_box",
+        "transform": [
+          {
+            "calculate": "datum.latitude + 9", 
+            "as": "latitude_offset"
+          },
+          {
+            "calculate": "datum.longitude + 56", 
+            "as": "longitude_offset"
+          }
+        ],
+        "data": {
+        "values": [
+          {"country": "Mongolia", "longitude": 103.8467, "latitude": 46.8625, "note": "Mongolia, highest per capita searches"}
         ]
       },
-      
-      "mark": {
-        "type": "text",
-        "fontSize": 12,
-        "color": "black",
-        "fontWeight": "bold",
-        "dy": -5,
-        "dx": 25
-      },
-      "transform": [
-        {
-          "filter": {"field": "country", "oneOf": ["Japan"]}
+        "mark": {
+            "type": "rect",
+            "color": "rgba(255, 255, 255, 0.7)",
+            "width": 200,
+            "height": 20
+
+        },
+        "encoding": {
+            "longitude": {"field": "longitude_offset"},
+            "latitude": {"field": "latitude_offset"},
+            "text": {"field": "note"}
         }
-      ],
-      "encoding": {
-        "longitude": {"field": "longitude"},
-        "latitude": {"field": "latitude"},
-        "text": {"field": "note"}
-      }
-    
       },
       {
         "name": "highest_search_per_capita_label",
@@ -153,17 +206,11 @@
             "dy": -20,
             "dx": 100
         },
-        "transform": [
-            {
-            "filter": {"field": "country", "oneOf": ["Mongolia"]}
-            }
-        ],
         "encoding": {
             "longitude": {"field": "longitude"},
             "latitude": {"field": "latitude"},
             "text": {"field": "note"}
         }
-    
       }
     ],
     "config": {}
