@@ -1,0 +1,170 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": 800,
+    "height": 400,
+    "params": [
+        {
+            "name": "minPerCapita",
+            "value": 0,
+            "bind": {"input": "range", "min": 0, "max": 600000, "step": 500, "name": "Min Per Capita Searches: "}
+        }
+    ],
+    "data": {
+        "url": "js/ne_110m_admin_0_countries.topojson",
+        "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}
+    },
+    "projection": {"type": "equalEarth"},
+    "layer": [
+      {
+        "transform": [
+          {
+            "calculate": "'Data is not available in ' + datum.properties.NAME",
+            "as": "note"
+          }
+        ],
+        "mark": {"type": "geoshape", "fill": "lightgray", "stroke": "white"},
+        "encoding": {"tooltip": {"field": "note"}}
+      },
+      {
+        "name": "oceans",
+        "data": {
+          "url": "https://raw.githubusercontent.com/FIT3179/Vega-Lite/main/7_others/oceans.topojson",
+          "format": {"type": "topojson", "feature": "oceans"}
+        },
+        "mark": {"type": "geoshape", "fill": "#34acdf"}
+      },
+      {
+        "name": "graticules",
+        "data": {
+          "url": "https://raw.githubusercontent.com/FIT3179/Vega-Lite/main/2_symbol_map/js/WorldMapWithGraticules.topojson",
+          "format": {"type": "topojson", "feature": "ne_110m_graticules_30"}
+        },
+        "mark": {"type": "geoshape", "fill": null, "stroke": "lightgray"}
+      },
+      {
+        "name": "anime_popularity_by_countries",
+        "transform": [
+            {
+                "lookup": "properties.NAME",
+                "from": {
+                "data": {
+                    "url": "data/anime_popularity_by_countries.csv"
+                    
+                },
+                "key": "country",
+                "fields": ["search_interest_index_2024"]
+                }
+            },
+            {
+                "lookup": "properties.NAME",
+                "from": {
+                "data": {
+                    "url": "data/country_population.csv"
+                    },
+                    "key": "country",
+                    "fields": ["population_2024"]
+                }
+            },
+            {
+                "calculate": "(datum.search_interest_index_2024 / 100 * 3.1e12) / datum.population_2024",
+                "as": "estimated_per_capita_searches_2024"
+            },
+            {
+                "filter": "datum.estimated_per_capita_searches_2024 > 0"
+            },
+            {
+                "filter": "datum.estimated_per_capita_searches_2024 >= minPerCapita"
+            }
+        ],
+        "mark": {"type": "geoshape", "stroke": "white"},
+        "encoding": {
+          "color": {
+            "field": "estimated_per_capita_searches_2024",
+            "title":"Anime Searches Per Capita (2024)",
+            "type": "quantitative",
+            "scale": {
+                "type": "threshold",
+                "domain": [500, 5500, 10500, 15500],
+                "range": ["#f2e5ff", "#d9b3ff", "#b366ff", "#8000ff", "#4d0099"]
+              
+            },
+            "legend": {
+                "orient": "right",
+                "offset": 50
+            }
+          },
+          "tooltip": [
+            {"field": "properties.NAME", "type": "nominal", "title": "Country"},
+            {
+                "field": "estimated_per_capita_searches_2024",
+                "type": "quantitative",
+                "format": ".0f",
+                "title": "Estimated Number of Anime Searches Per Capita (2024)"
+            },
+            {
+                "field": "search_interest_index_2024",
+                "type": "quantitative",
+                "format": ".1f",
+                "title": "Relative Anime Search Interest Index (2024)"
+            }
+          ]
+        }
+      },
+      {
+        "name": "japan_label",
+        "data": {
+        "values": [
+          {"country": "Japan", "longitude": 170.2529, "latitude": 36.2048, "note": "Japan, the Home of Anime"}
+        ]
+      },
+      
+      "mark": {
+        "type": "text",
+        "fontSize": 12,
+        "color": "black",
+        "fontWeight": "bold",
+        "dy": -5,
+        "dx": 25
+      },
+      "transform": [
+        {
+          "filter": {"field": "country", "oneOf": ["Japan"]}
+        }
+      ],
+      "encoding": {
+        "longitude": {"field": "longitude"},
+        "latitude": {"field": "latitude"},
+        "text": {"field": "note"}
+      }
+    
+      },
+      {
+        "name": "highest_search_per_capita_label",
+        "data": {
+        "values": [
+          {"country": "Mongolia", "longitude": 103.8467, "latitude": 46.8625, "note": "Mongolia, highest per capita searches"}
+        ]
+      },
+        "mark": {
+            "type": "text",
+            "fontSize": 12,
+            "color": "black",
+            "fontWeight": "bold",
+            "dy": -20,
+            "dx": 100
+        },
+        "transform": [
+            {
+            "filter": {"field": "country", "oneOf": ["Mongolia"]}
+            }
+        ],
+        "encoding": {
+            "longitude": {"field": "longitude"},
+            "latitude": {"field": "latitude"},
+            "text": {"field": "note"}
+        }
+    
+      }
+    ],
+    "config": {}
+  }
