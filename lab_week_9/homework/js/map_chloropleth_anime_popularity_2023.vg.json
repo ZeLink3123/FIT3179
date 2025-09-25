@@ -1,5 +1,13 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": {
+        "text": "Estimated Anime Searches Per Capita by Country (2023)",
+        "fontSize": 24,
+        "fontWeight": "bold",
+        "anchor": "start",
+        "color": "black",
+        "font": "Gravitas One"
+    },
     "width": 800,
     "height": 400,
     "params": [

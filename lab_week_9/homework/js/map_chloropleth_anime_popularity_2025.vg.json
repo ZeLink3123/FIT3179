@@ -1,5 +1,13 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": {
+        "text": "Estimated Anime Searches Per Capita by Country (2025)",
+        "fontSize": 24,
+        "fontWeight": "bold",
+        "anchor": "start",
+        "color": "black",
+        "font": "Gravitas One"
+    },
     "width": 800,
     "height": 400,
     "params": [
@@ -202,6 +210,7 @@
             "fontSize": 12,
             "color": "black",
             "fontWeight": "bold",
+            "font": "Comic Sans MS",
             "dy": -20,
             "dx": 100
         },
@@ -212,5 +221,21 @@
         }
       }
     ],
-    "config": {}
+    "config": {
+        "axis": {
+            "labelFont": "Comic Sans MS",
+            "titleFont": "Comic Sans MS"
+        },
+        "legend": {
+            "labelFont": "Comic Sans MS",
+            "titleFont": "Comic Sans MS"
+        },
+        "text": {
+            "font": "Comic Sans MS"
+        },
+        "header": {
+            "labelFont": "Comic Sans MS",
+            "titleFont": "Comic Sans MS"
+        }
+    }
   }
